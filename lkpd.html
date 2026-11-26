@@ -1,0 +1,1390 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2f4a28">
+  <meta name="description" content="E-LKPD Virtual Lab Elastisitas untuk pembelajaran Fisika SMA dengan model Guided Inquiry.">
+
+  <title>LKPD Digital | Virtual Lab Elastisitas</title>
+
+  <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    .app-container {
+      display: flex;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    .page-content {
+      width: 100%;
+      max-width: 1400px;
+      padding: 30px;
+      margin: auto;
+      min-width: 0;
+    }
+
+    .lkpd-wrap {
+      width: 100%;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .lkpd-hero {
+      background: linear-gradient(120deg, #2f4a28, #4d7a3a);
+      color: white;
+      padding: 30px;
+      border-radius: 16px;
+      margin-bottom: 24px;
+    }
+
+    .lkpd-hero h1 {
+      font-size: 25px;
+      margin: 0 0 12px;
+      color: white;
+    }
+
+    .lkpd-hero p {
+      color: #eef4e2;
+      line-height: 1.7;
+      margin: 5px 0;
+      font-size: 14px;
+    }
+
+    .lkpd-section {
+      background: white;
+      border: 1px solid #ecf1e8;
+      border-radius: 13px;
+      padding: 25px;
+      margin-bottom: 20px;
+      min-width: 0;
+    }
+
+    .lkpd-section h2 {
+      font-size: 19px;
+      color: #36592d;
+      margin: 0 0 16px;
+    }
+
+    .lkpd-section h3 {
+      font-size: 15px;
+      color: #405234;
+      margin: 22px 0 10px;
+    }
+
+    .lkpd-section p,
+    .lkpd-section li {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #535d4c;
+    }
+
+    .lkpd-section ol,
+    .lkpd-section ul {
+      padding-left: 22px;
+    }
+
+    .lkpd-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .lkpd-field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 7px;
+      color: #47533f;
+    }
+
+    .lkpd-field input,
+    .lkpd-field textarea {
+      width: 100%;
+      padding: 11px;
+      border: 1px solid #e3eadd;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 14px;
+      color: #33402a;
+      background: white;
+    }
+
+    .lkpd-field textarea {
+      min-height: 85px;
+      resize: vertical;
+    }
+
+    .lkpd-table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      margin: 14px 0;
+    }
+
+    .lkpd-table {
+      width: 100%;
+      min-width: 600px;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .lkpd-table th {
+      background: #36592d;
+      color: white;
+      padding: 11px;
+      text-align: center;
+      border: 1px solid #e3eadd;
+    }
+
+    .lkpd-table td {
+      border: 1px solid #e3eadd;
+      padding: 10px;
+      text-align: center;
+      color: #535d4c;
+    }
+
+    .lkpd-table tbody tr:nth-child(even) {
+      background: #fff6f9;
+    }
+
+    .lkpd-note {
+      background: #fff0f3;
+      border-left: 4px solid #d6405f;
+      padding: 13px 16px;
+      border-radius: 6px;
+      margin: 14px 0;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #4c5d42;
+    }
+
+    .formula {
+      background: #fff6f9;
+      text-align: center;
+      padding: 17px;
+      border-radius: 9px;
+      font-size: 19px;
+      font-weight: 700;
+      color: #36592d;
+      margin: 12px 0;
+    }
+
+    .question {
+      padding: 14px 0;
+      border-bottom: 1px solid #f0f3ed;
+    }
+
+    .question p {
+      font-weight: 600;
+      color: #47533f;
+      margin-bottom: 8px;
+    }
+
+    .question textarea {
+      width: 100%;
+      min-height: 75px;
+      border: 1px solid #e3eadd;
+      border-radius: 8px;
+      padding: 10px;
+      font-family: inherit;
+      font-size: 14px;
+    }
+
+    .lkpd-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .lkpd-btn {
+      display: inline-block;
+      border: none;
+      border-radius: 8px;
+      padding: 11px 18px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 13px;
+      text-decoration: none;
+    }
+
+    .lkpd-primary {
+      background: #6a9a45;
+      color: white;
+    }
+
+    .lkpd-secondary {
+      background: #eff4ea;
+      color: #404f36;
+    }
+
+    .lkpd-danger {
+      background: #ffe6eb;
+      color: #c4304f;
+    }
+
+    .lkpd-status {
+      font-size: 12px;
+      color: #6a9a45;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 900px) {
+      .page-content {
+        padding: 20px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .page-content {
+        padding: 17px;
+      }
+
+      .lkpd-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .lkpd-section {
+        padding: 17px;
+      }
+
+      .lkpd-hero {
+        padding: 22px;
+      }
+
+      .lkpd-hero h1 {
+        font-size: 21px;
+      }
+    }
+
+    @media print {
+      .sidebar,
+      .topbar,
+      .lkpd-actions,
+      .menu-toggle {
+        display: none !important;
+      }
+
+      .app-container {
+        display: block;
+      }
+
+      .main-content {
+        width: 100%;
+        margin-left: 0;
+        background: white;
+      }
+
+      .page-content {
+        padding: 0;
+      }
+
+      .lkpd-section {
+        break-inside: avoid;
+        border: 1px solid #aaaaaa;
+        box-shadow: none;
+      }
+
+      .lkpd-hero {
+        background: #36592d !important;
+        color: white !important;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      input,
+      textarea {
+        color: black !important;
+      }
+    }
+
+    /* ===== TAMPILAN LKPD YANG LEBIH MENARIK ===== */
+    .lkpd-hero {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      background: linear-gradient(120deg, #2f4a28 0%, #4d7a3a 60%, #6a9a45 100%);
+      padding: 32px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(42, 56, 33, 0.18);
+    }
+
+    .lkpd-hero::before {
+      content: "";
+      position: absolute;
+      right: -70px;
+      top: -70px;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .lkpd-hero::after {
+      content: "";
+      position: absolute;
+      left: -40px;
+      bottom: -90px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .hero-text,
+    .hero-spring {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.16);
+      color: #ffffff;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+    }
+
+    .lkpd-hero h1 {
+      font-size: 26px;
+      line-height: 1.25;
+    }
+
+    .hero-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .hero-chips span {
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      color: #ffffff;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+    }
+
+    .hero-spring {
+      flex: none;
+      width: 110px;
+      height: auto;
+    }
+
+    .journey {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 2px 2px 12px;
+      margin-bottom: 8px;
+      scroll-snap-type: x proximity;
+    }
+
+    .journey a {
+      flex: none;
+      scroll-snap-align: start;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #ffffff;
+      border: 1px solid #e1ead8;
+      border-radius: 999px;
+      padding: 7px 14px 7px 8px;
+      text-decoration: none;
+      color: #33402a;
+      font-size: 12.5px;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    .journey a b {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #6a9a45;
+      color: #ffffff;
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+    }
+
+    .journey a:hover {
+      border-color: #6a9a45;
+      background: #f4f9f0;
+      transform: translateY(-2px);
+    }
+
+    .lkpd-section {
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(42, 59, 32, 0.05);
+    }
+
+    .lkpd-section > h2 {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+      border-bottom: 2px solid #eef3ea;
+    }
+
+    .sec-icon {
+      flex: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: #eef5e8;
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+    }
+
+    .act-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 28px 0 14px;
+      padding: 12px 14px;
+      background: linear-gradient(90deg, #f1f7ec, #ffffff);
+      border-left: 5px solid #6a9a45;
+      border-radius: 12px;
+      scroll-margin-top: 16px;
+    }
+
+    .lkpd-section > .act-head:first-child {
+      margin-top: 0;
+    }
+
+    .lkpd-section .act-head h3 {
+      margin: 0;
+      font-size: 16px;
+      color: #2f4a28;
+    }
+
+    .act-head small {
+      display: block;
+      margin-bottom: 2px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #6a9a45;
+    }
+
+    .act-icon {
+      flex: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: #6a9a45;
+      color: #ffffff;
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+    }
+
+    .lkpd-section h3.mini-h {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14.5px;
+    }
+
+    .lkpd-section h3.mini-h::before {
+      content: "";
+      width: 4px;
+      height: 16px;
+      border-radius: 2px;
+      background: #6a9a45;
+    }
+
+    /* daftar bernomor */
+    .lkpd-section ol {
+      list-style: none;
+      counter-reset: item;
+      padding-left: 0;
+    }
+
+    .lkpd-section ol > li {
+      counter-increment: item;
+      position: relative;
+      padding: 8px 0 8px 38px;
+    }
+
+    .lkpd-section ol > li::before {
+      content: counter(item);
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #eef5e8;
+      color: #4a7a31;
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* persamaan */
+    .eq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 16px 0;
+    }
+
+    .eq-card {
+      background: linear-gradient(160deg, #fff6f9, #eef5e8);
+      border: 1px solid #dce8d2;
+      border-radius: 14px;
+      padding: 14px 16px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .eq-title {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #4a7a31;
+      background: #ffffff;
+      border-radius: 999px;
+      padding: 3px 10px;
+    }
+
+    .eq-math {
+      margin: 8px 0 4px;
+      font-size: 19px;
+      color: #2f4a28;
+      overflow-x: auto;
+    }
+
+    .eq-card small {
+      display: block;
+      font-size: 12px;
+      line-height: 1.6;
+      color: #6a7464;
+    }
+
+    mjx-container {
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+
+    /* kartu variabel */
+    .var-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 12px 0;
+    }
+
+    .var-card {
+      background: #ffffff;
+      border: 1px solid #e1ead8;
+      border-top: 4px solid var(--c);
+      border-radius: 14px;
+      padding: 14px;
+    }
+
+    .var-card .var-ic {
+      font-size: 22px;
+    }
+
+    .var-card b {
+      display: block;
+      margin: 6px 0 4px;
+      font-size: 13.5px;
+      color: #2f4a28;
+    }
+
+    .lkpd-section .var-card p {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* tips dan gambar */
+    .tip {
+      display: flex;
+      gap: 12px;
+      background: #fff8e6;
+      border: 1px solid #f2dfa8;
+      border-left: 5px solid #e0a82e;
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin: 14px 0;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #5a4a1b;
+    }
+
+    .tip-icon {
+      font-size: 20px;
+    }
+
+    .lkpd-figure {
+      margin: 16px auto;
+      max-width: 430px;
+      text-align: center;
+    }
+
+    .lkpd-figure svg {
+      width: 100%;
+      height: auto;
+      background: #fafcf8;
+      border: 1px solid #e4ebdd;
+      border-radius: 12px;
+    }
+
+    .lkpd-figure figcaption {
+      margin-top: 6px;
+      font-size: 12px;
+      line-height: 1.6;
+      color: #828d7a;
+    }
+
+    /* pertanyaan dan isian */
+    .question {
+      background: #fafcf8;
+      border: 1px solid #e8eee2;
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin: 10px 0;
+    }
+
+    .question p {
+      margin-top: 0;
+    }
+
+    .lkpd-field textarea,
+    .lkpd-field input,
+    .question textarea {
+      background: #ffffff;
+      transition: 0.2s;
+    }
+
+    .lkpd-field textarea:focus,
+    .lkpd-field input:focus,
+    .question textarea:focus {
+      outline: none;
+      border-color: #6a9a45;
+      box-shadow: 0 0 0 3px rgba(85, 129, 55, 0.18);
+    }
+
+    .lkpd-table th:first-child {
+      border-top-left-radius: 8px;
+    }
+
+    .lkpd-table th:last-child {
+      border-top-right-radius: 8px;
+    }
+
+    .formula {
+      display: none;
+    }
+
+    @media (max-width: 700px) {
+      .eq-grid,
+      .var-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .lkpd-hero {
+        padding: 22px;
+      }
+
+      .lkpd-hero h1 {
+        font-size: 21px;
+      }
+
+      .hero-spring {
+        width: 64px;
+      }
+
+      .act-head {
+        padding: 10px;
+        gap: 10px;
+      }
+
+      .act-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 19px;
+      }
+    }
+
+    @media print {
+      .journey,
+      .hero-spring {
+        display: none !important;
+      }
+
+      .act-head,
+      .eq-card,
+      .var-card,
+      .lkpd-figure,
+      .question {
+        break-inside: avoid;
+      }
+    }
+  </style>
+
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+      svg: { fontCache: 'global' },
+      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <script src="js/auth.js"></script>
+    <link rel="stylesheet" href="css/theme.css">
+</head>
+
+<body>
+
+<div class="app-container">
+
+  <aside class="sidebar" id="sidebar"></aside>
+  <script src="js/sidebar.js"></script>
+
+  <main class="main-content">
+
+    <header class="topbar">
+      <button id="menuToggle" class="menu-toggle" type="button">☰</button>
+
+      <div class="breadcrumb">
+        VIRTUAL LAB / <strong>LKPD Digital</strong>
+      </div>
+
+      <div class="profile">
+        <div class="profile-avatar">S</div>
+        <div>
+          <strong>Peserta Didik</strong>
+          <small>Siswa Fisika SMA</small>
+        </div>
+      </div>
+    </header>
+
+    <div class="page-content">
+      <div class="lkpd-wrap">
+
+        <div class="ach" data-ach="lkpd"></div>
+
+        <!-- JUDUL LKPD -->
+        <section class="lkpd-hero">
+          <div class="hero-text">
+            <span class="hero-tag">E-LKPD · FISIKA SMA</span>
+            <h1>LEMBAR KERJA PESERTA DIDIK DIGITAL</h1>
+            <p><b>VIRTUAL LAB: ELASTISITAS</b></p>
+            <p>
+              Penyelidikan Sifat Elastisitas Berbagai Bahan dan Hubungan
+              Gaya dengan Pertambahan Panjang
+            </p>
+            <div class="hero-chips">
+              <span>🔍 Guided Inquiry (Inkuiri Terbimbing)</span>
+              <span>🎓 Fase F / Kelas XI</span>
+              <span>⏱ 3 JP (135 menit)</span>
+            </div>
+          </div>
+          <svg class="hero-spring" viewBox="0 0 100 170" aria-hidden="true">
+            <line x1="10" y1="8" x2="90" y2="8" stroke="#dfe8d4" stroke-width="5" stroke-linecap="round"/>
+            <line x1="50" y1="8" x2="50" y2="22" stroke="#dfe8d4" stroke-width="3"/>
+            <polyline points="50,22 70,32 30,44 70,56 30,68 70,80 30,92 70,104 50,112" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+            <line x1="50" y1="112" x2="50" y2="124" stroke="#dfe8d4" stroke-width="3"/>
+            <rect x="30" y="124" width="40" height="34" rx="6" fill="#f2c94c"/>
+            <text x="50" y="146" text-anchor="middle" font-size="12" font-weight="700" fill="#2f4a28" font-family="Arial, sans-serif">m</text>
+          </svg>
+        </section>
+
+        <nav class="journey" aria-label="Alur kegiatan LKPD">
+          <a href="#kegiatan-1"><b>1</b>Orientasi</a>
+          <a href="#kegiatan-2"><b>2</b>Rumusan masalah</a>
+          <a href="#kegiatan-3"><b>3</b>Hipotesis</a>
+          <a href="#kegiatan-4"><b>4</b>Penyelidikan</a>
+          <a href="#kegiatan-5"><b>5</b>Data</a>
+          <a href="#kegiatan-6"><b>6</b>Analisis</a>
+          <a href="#kegiatan-7"><b>7</b>Kesimpulan</a>
+          <a href="#kegiatan-8"><b>8</b>Komunikasi</a>
+          <a href="#refleksi"><b>★</b>Refleksi</a>
+        </nav>
+
+        <!-- IDENTITAS PESERTA DIDIK -->
+        <section class="lkpd-section">
+          <h2><span class="sec-icon">🧑‍🎓</span>Identitas Peserta Didik</h2>
+
+          <div class="lkpd-grid">
+
+            <div class="lkpd-field">
+              <label for="studentName">Nama</label>
+              <input id="studentName" data-save>
+            </div>
+
+            <div class="lkpd-field">
+              <label for="studentClass">Kelas</label>
+              <input id="studentClass" data-save>
+            </div>
+
+            <div class="lkpd-field">
+              <label for="studentGroup">Kelompok</label>
+              <input id="studentGroup" data-save>
+            </div>
+
+            <div class="lkpd-field">
+              <label for="experimentDate">Tanggal praktikum</label>
+              <input id="experimentDate" type="date" data-save>
+            </div>
+
+          </div>
+
+          <div class="lkpd-field" style="margin-top:14px">
+            <label for="groupMembers">Anggota kelompok</label>
+            <textarea
+              id="groupMembers"
+              data-save
+              placeholder="Masukkan nama anggota kelompok">
+            </textarea>
+          </div>
+        </section>
+
+        <!-- A. IDENTITAS E-LKPD -->
+        <section class="lkpd-section">
+          <h2><span class="sec-icon">📋</span>A. Identitas E-LKPD</h2>
+
+          <div class="lkpd-table-wrap">
+            <table class="lkpd-table">
+              <tr><th>Komponen</th><th>Keterangan</th></tr>
+              <tr><td>Satuan pendidikan</td><td>SMA/MA</td></tr>
+              <tr><td>Mata pelajaran</td><td>Fisika</td></tr>
+              <tr><td>Fase/Kelas</td><td>F / XI</td></tr>
+              <tr><td>Materi</td><td>Elastisitas</td></tr>
+              <tr>
+                <td>Submateri</td>
+                <td>Sifat elastis dan plastis, Hukum Hooke, serta konstanta elastisitas</td>
+              </tr>
+              <tr>
+                <td>Model pembelajaran</td>
+                <td>Guided Inquiry (Inkuiri Terbimbing)</td>
+              </tr>
+              <tr>
+                <td>Media pembelajaran</td>
+                <td>Website Virtual Lab: Elastisitas</td>
+              </tr>
+              <tr><td>Alokasi waktu</td><td>3 JP (135 menit)</td></tr>
+            </table>
+          </div>
+        </section>
+
+        <!-- B DAN C -->
+        <section class="lkpd-section">
+          <h2><span class="sec-icon">🎯</span>B. Capaian Pembelajaran</h2>
+
+          <p>
+            Pada akhir Fase F, peserta didik mampu menganalisis hubungan
+            gerak dan gaya serta pemanfaatannya untuk menjelaskan fenomena
+            alam, desain, atau rekayasa struktur. Dalam kegiatan ini,
+            pembelajaran difokuskan pada penyelidikan sifat elastisitas
+            bahan dan hubungan antara gaya dengan perubahan panjang.
+          </p>
+
+          <h2 style="margin-top:26px"><span class="sec-icon">🏁</span>C. Tujuan Pembelajaran</h2>
+
+          <ol>
+            <li>
+              Mengidentifikasi fenomena elastisitas dalam kehidupan
+              sehari-hari serta membedakan sifat elastis dan plastis
+              berdasarkan hasil pengamatan.
+            </li>
+            <li>
+              Merumuskan hipotesis mengenai hubungan antara besar gaya
+              yang diberikan dengan pertambahan panjang bahan.
+            </li>
+            <li>
+              Melakukan penyelidikan virtual menggunakan delapan jenis
+              bahan uji yang tersedia pada website.
+            </li>
+            <li>
+              Menganalisis pengaruh variasi massa beban terhadap
+              pertambahan panjang dan menentukan konstanta elastisitas
+              berdasarkan hasil simulasi.
+            </li>
+            <li>
+              Membandingkan karakteristik elastisitas bahan,
+              menginterpretasikan grafik, dan menyimpulkan hasil
+              penyelidikan.
+            </li>
+          </ol>
+        </section>
+
+        <!-- D. PETUNJUK -->
+        <section class="lkpd-section">
+          <h2><span class="sec-icon">🧭</span>D. Petunjuk Penggunaan Website</h2>
+
+          <ol>
+            <li>Buka website Virtual Lab: Elastisitas melalui perangkat yang digunakan.</li>
+            <li>Isi identitas peserta didik dan kelompok pada halaman E-LKPD.</li>
+            <li>Pelajari materi singkat mengenai elastisitas dan Hukum Hooke.</li>
+            <li>Masuk ke halaman praktikum virtual dan ikuti tahapan perakitan sesuai petunjuk website.</li>
+            <li>Pilih salah satu dari delapan jenis bahan uji yang tersedia.</li>
+            <li>Atur massa beban melalui kontrol simulasi sesuai instruksi percobaan.</li>
+            <li>Jalankan simulasi dan amati perubahan panjang bahan uji.</li>
+            <li>Amati tabel hasil pengamatan dan grafik yang diperbarui oleh sistem.</li>
+            <li>Ulangi pengujian menggunakan variasi massa dan bahan uji lainnya.</li>
+            <li>Jawab pertanyaan penyelidikan, analisis, kesimpulan, dan refleksi melalui kolom digital.</li>
+          </ol>
+
+          <div class="lkpd-note">
+            <b>Ketentuan penyelidikan</b>
+            <ul>
+              <li>Selesaikan tahapan perakitan sebelum simulasi dimulai.</li>
+              <li>Gunakan satu jenis bahan dalam satu rangkaian pengambilan data dengan variasi massa.</li>
+              <li>Ubah satu variabel bebas dalam satu kali pengamatan.</li>
+              <li>Pertahankan kondisi pengukuran lainnya agar perbandingan data lebih objektif.</li>
+              <li>
+                Seluruh hasil pengamatan dan data pengujian direkam
+                serta disimpan otomatis oleh sistem website. Peserta
+                didik tidak perlu melakukan pencatatan data secara manual.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- E. KEGIATAN PENYELIDIKAN -->
+        <section class="lkpd-section">
+          <h2><span class="sec-icon">🔬</span>E. Kegiatan Penyelidikan</h2>
+
+          <!-- KEGIATAN 1 -->
+          <div class="act-head" id="kegiatan-1"><span class="act-icon">🔭</span><div><small>Tahap 1 · Orientasi</small><h3>Kegiatan 1 – Orientasi dan Identifikasi Fenomena</h3></div></div>
+
+          <p>
+            Pernahkah kalian mengamati pegas pada timbangan, karet gelang,
+            atau suspensi kendaraan? Ketika suatu benda diberikan gaya,
+            benda tersebut dapat mengalami perubahan bentuk atau ukuran.
+            Beberapa benda dapat kembali ke bentuk semula setelah gaya
+            dihilangkan, sedangkan benda lainnya mengalami perubahan
+            bentuk permanen.
+          </p>
+
+          <p><b>Pertanyaan pemantik:</b></p>
+
+          <ol>
+            <li>Mengapa suatu benda dapat mengalami perubahan panjang ketika diberikan gaya?</li>
+            <li>Apakah semua bahan memiliki kemampuan elastisitas yang sama?</li>
+            <li>Bagaimana pengaruh massa beban terhadap pertambahan panjang suatu bahan?</li>
+            <li>Apa yang terjadi jika suatu bahan diberikan gaya melebihi batas elastisnya?</li>
+          </ol>
+
+          <div class="lkpd-field">
+            <label for="orientationAnswer">Jawaban hasil diskusi</label>
+            <textarea id="orientationAnswer" data-save></textarea>
+          </div>
+
+          <!-- KEGIATAN 2 -->
+          <div class="act-head" id="kegiatan-2"><span class="act-icon">❓</span><div><small>Tahap 2 · Rumusan masalah</small><h3>Kegiatan 2 – Merumuskan Masalah</h3></div></div>
+
+          <p>
+            <b>Pertanyaan penyelidikan utama:</b>
+            Bagaimana pengaruh besar gaya terhadap pertambahan panjang
+            pada berbagai jenis bahan uji, dan bagaimana menentukan
+            karakteristik elastisitas masing-masing bahan?
+          </p>
+
+          <div class="lkpd-field">
+            <label for="problemStatement">
+              Rumusan permasalahan penyelidikan kelompok
+            </label>
+            <textarea id="problemStatement" data-save></textarea>
+          </div>
+
+          <!-- KEGIATAN 3 -->
+          <div class="act-head" id="kegiatan-3"><span class="act-icon">💡</span><div><small>Tahap 3 · Hipotesis</small><h3>Kegiatan 3 – Merumuskan Hipotesis</h3></div></div>
+          <div class="tip"><span class="tip-icon">💡</span><div><b>Tips:</b> hipotesis yang baik dapat diuji dengan data, misalnya berbentuk “jika massa beban ditambah, maka …”.</div></div>
+          
+
+          <p>
+            Sebelum memulai simulasi, buatlah dugaan sementara
+            berdasarkan pengetahuan awal kelompok.
+          </p>
+
+          <ol>
+            <li>Bagaimana pengaruh peningkatan massa beban terhadap pertambahan panjang bahan?</li>
+            <li>Apakah delapan jenis bahan uji memiliki karakteristik elastisitas yang sama?</li>
+            <li>Bagaimana hubungan antara konstanta elastisitas dengan tingkat kekakuan bahan?</li>
+          </ol>
+
+          <div class="lkpd-field">
+            <label for="hypothesis">Hipotesis kelompok</label>
+            <textarea id="hypothesis" data-save></textarea>
+          </div>
+
+          <!-- KEGIATAN 4 -->
+          <div class="act-head" id="kegiatan-4"><span class="act-icon">🧪</span><div><small>Tahap 4 · Penyelidikan</small><h3>Kegiatan 4 – Melakukan Penyelidikan Virtual</h3></div></div>
+
+          <p>
+            Pelaksanaan kegiatan 4 dilakukan pada halaman praktikum
+            virtual. Ikuti petunjuk persiapan, perakitan, pemilihan bahan
+            uji, dan pelaksanaan simulasi yang tersedia pada halaman
+            praktikum.
+          </p>
+
+          <div class="lkpd-actions">
+            <a
+              href="simulasi.html#kegiatan4"
+              class="lkpd-btn lkpd-primary">
+              Buka Kegiatan 4 di Virtual Laboratory
+            </a>
+          </div>
+
+          <div class="lkpd-note">
+            <b>Delapan bahan uji pada website:</b>
+            Baja, Aluminium, Tembaga, Kuningan, Kayu, Karet,
+            Plastik PVC, dan Pegas. Lakukan pengujian terhadap
+            seluruh bahan dengan variasi massa.
+          </div>
+
+          <h3 class="mini-h">Variabel Percobaan</h3>
+
+          <div class="var-grid">
+            <div class="var-card" style="--c:#6a9a45"><span class="var-ic">🎚️</span><b>Variabel bebas</b><p>Massa beban yang diberikan</p></div>
+            <div class="var-card" style="--c:#d6405f"><span class="var-ic">📏</span><b>Variabel terikat</b><p>Pertambahan panjang bahan uji</p></div>
+            <div class="var-card" style="--c:#e0a82e"><span class="var-ic">🔒</span><b>Variabel kontrol</b><p>Kondisi awal, parameter pengukuran, dan percepatan gravitasi</p></div>
+          </div>
+        </section>
+
+        <!-- KEGIATAN 5 -->
+        <section class="lkpd-section">
+          <div class="act-head" id="kegiatan-5"><span class="act-icon">📊</span><div><small>Tahap 5 · Pengumpulan data</small><h3>Kegiatan 5 – Mengamati Data Hasil Percobaan</h3></div></div>
+
+          <p>
+            Setelah menyelesaikan simulasi, perhatikan data hasil
+            pengujian yang ditampilkan pada tabel berikut. Data
+            diperbarui berdasarkan hasil simulasi dan tersimpan
+            otomatis oleh sistem.
+          </p>
+
+          <div class="lkpd-table-wrap">
+            <table class="lkpd-table">
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>Bahan uji</th>
+                  <th>Massa (kg)</th>
+                  <th>Gaya (N)</th>
+                  <th>Panjang akhir (mm)</th>
+                  <th>Pertambahan panjang (mm)</th>
+                  <th>Konstanta (N/m)</th>
+                </tr>
+              </thead>
+
+              <tbody id="lkpdObservationBody">
+                <tr>
+                  <td colspan="7">
+                    Data pengamatan belum tersedia.
+                    Lakukan simulasi terlebih dahulu.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="lkpd-status" id="observationStatus">
+            Data hasil simulasi akan ditampilkan secara otomatis.
+          </p>
+
+          <div class="lkpd-note">
+            Data hasil pengamatan meliputi jenis bahan uji, massa beban,
+            gaya berat, panjang awal, panjang akhir, pertambahan panjang,
+            dan konstanta elastisitas. Tidak diperlukan pengisian tabel
+            data secara manual.
+          </div>
+
+          <h3 class="mini-h">Ringkasan Konstanta Elastisitas Setiap Bahan</h3>
+
+          <div class="lkpd-table-wrap">
+            <table class="lkpd-table">
+              <thead>
+                <tr>
+                  <th>Bahan uji</th>
+                  <th>Jumlah pengujian</th>
+                  <th>Rata-rata konstanta (N/m)</th>
+                </tr>
+              </thead>
+
+              <tbody id="materialSummaryBody">
+                <tr>
+                  <td colspan="3">
+                    Ringkasan akan muncul setelah data tersedia.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- KEGIATAN 6 -->
+        <section class="lkpd-section">
+          <div class="act-head" id="kegiatan-6"><span class="act-icon">🧮</span><div><small>Tahap 6 · Analisis data</small><h3>Kegiatan 6 – Mengolah dan Menganalisis Data</h3></div></div>
+          <div class="tip"><span class="tip-icon">💡</span><div><b>Tips:</b> hitung dahulu gaya berat dan pertambahan panjang (dalam meter), baru tentukan konstanta k dari data tiap percobaan.</div></div>
+          
+
+          <p>
+            Gunakan persamaan berikut untuk memahami pengolahan data
+            yang dilakukan dalam penyelidikan:
+          </p>
+
+          <div class="eq-grid">
+            <div class="eq-card">
+              <span class="eq-title">Gaya berat</span>
+              <div class="eq-math">\[ F = m \times g \]</div>
+              <small>\(m\) = massa beban (kg), \(g = 10\ \text{m/s}^2\)</small>
+            </div>
+            <div class="eq-card">
+              <span class="eq-title">Pertambahan panjang</span>
+              <div class="eq-math">\[ \Delta x = x - x_0 \]</div>
+              <small>\(x\) = panjang akhir, \(x_0\) = panjang awal</small>
+            </div>
+            <div class="eq-card">
+              <span class="eq-title">Konstanta elastisitas</span>
+              <div class="eq-math">\[ k = \frac{F}{\Delta x} \]</div>
+              <small>\(F\) dalam N, \(\Delta x\) dalam m, \(k\) dalam N/m</small>
+            </div>
+            <div class="eq-card">
+              <span class="eq-title">Rata-rata konstanta</span>
+              <div class="eq-math">\[ \bar{k} = \frac{\sum k}{n} \]</div>
+              <small>\(n\) = banyak pengujian pada satu bahan</small>
+            </div>
+          </div><p>
+            Amati grafik hasil simulasi yang ditampilkan website.
+            Pada grafik hubungan gaya terhadap pertambahan panjang,
+            sumbu X menunjukkan pertambahan panjang (Δx), sedangkan
+            sumbu Y menunjukkan gaya (F). Pada hubungan linear dalam
+            rentang elastis, gradien grafik menyatakan konstanta
+            elastisitas.
+          </p>
+
+          <figure class="lkpd-figure">
+            <svg viewBox="0 0 400 260" role="img" aria-label="Contoh grafik gaya terhadap pertambahan panjang berupa garis lurus melalui titik asal">
+              <line x1="50" y1="215" x2="375" y2="215" stroke="#535d4c" stroke-width="2"/>
+              <line x1="50" y1="215" x2="50" y2="18" stroke="#535d4c" stroke-width="2"/>
+              <polygon points="375,215 366,210 366,220" fill="#535d4c"/>
+              <polygon points="50,18 45,27 55,27" fill="#535d4c"/>
+              <line x1="50" y1="215" x2="340" y2="55" stroke="#6a9a45" stroke-width="3.5" stroke-linecap="round"/>
+              <line x1="290" y1="83" x2="290" y2="215" stroke="#d6405f" stroke-width="1.6" stroke-dasharray="5 4"/>
+              <line x1="50" y1="83" x2="290" y2="83" stroke="#d6405f" stroke-width="1.6" stroke-dasharray="5 4"/>
+              <circle cx="110" cy="182" r="5" fill="#2f4a28"/>
+              <circle cx="170" cy="149" r="5" fill="#2f4a28"/>
+              <circle cx="230" cy="116" r="5" fill="#2f4a28"/>
+              <circle cx="290" cy="83" r="5" fill="#2f4a28"/>
+              <text x="290" y="234" text-anchor="middle" font-size="13" fill="#d6405f" font-family="Arial, sans-serif" font-style="italic">Δx</text>
+              <text x="40" y="87" text-anchor="end" font-size="13" fill="#d6405f" font-family="Arial, sans-serif" font-style="italic">F</text>
+              <text x="212" y="252" text-anchor="middle" font-size="12" fill="#535d4c" font-family="Arial, sans-serif">Pertambahan panjang Δx</text>
+              <text x="14" y="120" text-anchor="middle" font-size="12" fill="#535d4c" font-family="Arial, sans-serif" transform="rotate(-90 14 120)">Gaya F</text>
+              <text x="225" y="62" font-size="13" font-weight="700" fill="#4a7a31" font-family="Arial, sans-serif">gradien = k = F / Δx</text>
+            </svg>
+            <figcaption>Ilustrasi: pada daerah elastis, grafik F terhadap Δx berupa garis lurus dan gradiennya adalah konstanta k.</figcaption>
+          </figure>
+          <div class="lkpd-actions">
+            <a
+              href="simulasi.html#grafik"
+              class="lkpd-btn lkpd-secondary">
+              Lihat Grafik Hasil Simulasi
+            </a>
+          </div>
+
+          <h3 class="mini-h">Pertanyaan Analisis</h3>
+
+          <div class="question">
+            <p>1. Bagaimana hubungan antara massa beban dengan pertambahan panjang bahan uji?</p>
+            <textarea id="analysis1" data-save></textarea>
+          </div>
+
+          <div class="question">
+            <p>2. Apakah gaya berat berbanding lurus dengan pertambahan panjang? Jelaskan berdasarkan hasil simulasi.</p>
+            <textarea id="analysis2" data-save></textarea>
+          </div>
+
+          <div class="question">
+            <p>3. Apakah kedelapan bahan uji memiliki pertambahan panjang yang sama ketika diberikan gaya yang sama?</p>
+            <textarea id="analysis3" data-save></textarea>
+          </div>
+
+          <div class="question">
+            <p>4. Bahan manakah yang memiliki nilai konstanta elastisitas paling besar?</p>
+            <textarea id="analysis4" data-save></textarea>
+          </div>
+
+          <div class="question">
+            <p>5. Bahan manakah yang memiliki nilai konstanta elastisitas paling kecil?</p>
+            <textarea id="analysis5" data-save></textarea>
+          </div>
+
+          <div class="question">
+            <p>6. Bagaimana hubungan antara nilai konstanta elastisitas dengan tingkat kekakuan bahan?</p>
+            <textarea id="analysis6" data-save></textarea>
+          </div>
+
+          <div class="question">
+            <p>7. Apakah grafik yang ditampilkan menunjukkan hubungan linear? Jelaskan berdasarkan bentuk grafik.</p>
+            <textarea id="analysis7" data-save></textarea>
+          </div>
+
+          <div class="question">
+            <p>8. Apakah hasil penyelidikan sesuai dengan hipotesis awal kelompok? Berikan alasan berdasarkan data.</p>
+            <textarea id="analysis8" data-save></textarea>
+          </div>
+        </section>
+
+        <!-- KEGIATAN 7 -->
+        <section class="lkpd-section">
+          <div class="act-head" id="kegiatan-7"><span class="act-icon">✅</span><div><small>Tahap 7 · Kesimpulan</small><h3>Kegiatan 7 – Menarik Kesimpulan</h3></div></div>
+          <div class="tip"><span class="tip-icon">💡</span><div><b>Tips:</b> kesimpulan harus menjawab rumusan masalah pada Kegiatan 2 dan didukung data hasil percobaan.</div></div>
+          
+
+          <p>
+            Berdasarkan hasil pengamatan, pengolahan data, dan analisis,
+            susun kesimpulan kelompok.
+          </p>
+
+          <div class="question">
+            <p>1. Bagaimana hubungan antara gaya dan pertambahan panjang bahan?</p>
+            <textarea id="conclusion1" data-save></textarea>
+          </div>
+
+          <div class="question">
+            <p>2. Bagaimana perbedaan karakteristik elastisitas dari delapan bahan uji?</p>
+            <textarea id="conclusion2" data-save></textarea>
+          </div>
+
+          <div class="question">
+            <p>3. Bahan manakah yang memiliki konstanta elastisitas paling besar dan paling kecil?</p>
+            <textarea id="conclusion3" data-save></textarea>
+          </div>
+
+          <div class="question">
+            <p>4. Bagaimana hubungan konstanta elastisitas dengan kekakuan bahan?</p>
+            <textarea id="conclusion4" data-save></textarea>
+          </div>
+
+          <div class="question">
+            <p>5. Apakah hasil percobaan mendukung hipotesis awal kelompok?</p>
+            <textarea id="conclusion5" data-save></textarea>
+          </div>
+        </section>
+
+        <!-- KEGIATAN 8 -->
+        <section class="lkpd-section">
+          <div class="act-head" id="kegiatan-8"><span class="act-icon">🎤</span><div><small>Tahap 8 · Komunikasi</small><h3>Kegiatan 8 – Mengomunikasikan Hasil Penyelidikan</h3></div></div>
+
+          <p>
+            Presentasikan hasil praktikum kelompok dengan
+            memperhatikan hal-hal berikut:
+          </p>
+
+          <ul>
+            <li>Menjelaskan tujuan dan prosedur penyelidikan.</li>
+            <li>Menjelaskan tahapan perakitan alat praktikum virtual.</li>
+            <li>Menunjukkan hasil pengamatan dari delapan bahan uji melalui tampilan website.</li>
+            <li>Menjelaskan hasil perhitungan konstanta elastisitas.</li>
+            <li>Menampilkan dan menginterpretasikan grafik.</li>
+            <li>Membandingkan karakteristik elastisitas setiap bahan.</li>
+            <li>Menyampaikan kesimpulan berdasarkan hasil penyelidikan.</li>
+          </ul>
+        </section>
+
+        <!-- REFLEKSI -->
+        <section class="lkpd-section">
+          <h2 id="refleksi"><span class="sec-icon">💭</span>G. Refleksi Individu</h2>
+
+          <p>
+            Jawablah pertanyaan refleksi berikut secara individu.
+          </p>
+
+          <div class="question">
+            <p>1. Apa pengetahuan baru yang kalian peroleh setelah melakukan praktikum virtual?</p>
+            <textarea id="reflection1" data-save></textarea>
+          </div>
+
+          <div class="question">
+            <p>2. Bagaimana tahapan perakitan dan penggunaan simulasi membantu kalian memahami konsep elastisitas?</p>
+            <textarea id="reflection2" data-save></textarea>
+          </div>
+
+          <div class="question">
+            <p>3. Apa perbedaan karakteristik bahan yang kalian temukan selama penyelidikan?</p>
+            <textarea id="reflection3" data-save></textarea>
+          </div>
+
+          <div class="question">
+            <p>4. Apakah penggunaan Virtual Lab membantu kalian memahami Hukum Hooke? Jelaskan alasannya.</p>
+            <textarea id="reflection4" data-save></textarea>
+          </div>
+        </section>
+
+        <!-- TOMBOL -->
+        <div class="lkpd-actions">
+          <button
+            type="button"
+            class="lkpd-btn lkpd-primary"
+            id="printLKPD">
+            Cetak / Simpan PDF
+          </button>
+
+          <button
+            type="button"
+            class="lkpd-btn lkpd-secondary"
+            id="refreshLKPD">
+            Perbarui Data Pengamatan
+          </button>
+
+          <button
+            type="button"
+            class="lkpd-btn lkpd-danger"
+            id="clearAnswers">
+            Hapus Jawaban LKPD
+          </button>
+        </div>
+
+        <p class="lkpd-status" id="saveStatus">
+          Identitas dan jawaban tersimpan otomatis pada perangkat ini.
+        </p>
+
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="js/pencapaian.js"></script>
+<script src="js/app.js"></script>
+<script src="js/lkpd.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,1052 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2f4a28">
+    <meta name="description" content="Virtual Lab Elastisitas: media pembelajaran fisika SMA untuk Hukum Hooke, tegangan, regangan, dan Modulus Young.">
+
+    <title>Materi Pembelajaran | Virtual Lab Elastisitas</title>
+
+    <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/auth.js"></script>
+
+    <!-- Konfigurasi MathJax -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            },
+            options: {
+                skipHtmlTags: [
+                    'script', 'noscript', 'style',
+                    'textarea', 'pre', 'code'
+                ]
+            }
+        };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+    <style>
+        .formula-box {
+            background: #f4f9f0;
+            border-left: 4px solid #6a9a45;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 18px 0;
+            text-align: center;
+            overflow-x: auto;
+            color: #33402a;
+            font-size: 17px;
+        }
+
+        .formula-box small {
+            display: block;
+            margin-top: 15px;
+            color: #788271;
+            font-size: 12px;
+            line-height: 1.7;
+            text-align: left;
+        }
+
+        .equation {
+            margin: 16px 0;
+            padding: 12px;
+            overflow-x: auto;
+            text-align: center;
+        }
+
+        .example-box {
+            background: #fafcf8;
+            border: 1px solid #e9efe4;
+            border-radius: 10px;
+            padding: 18px;
+            margin: 20px 0;
+            line-height: 1.8;
+        }
+
+        .example-box p {
+            margin-top: 12px;
+        }
+
+        .topic-section {
+            line-height: 1.8;
+        }
+
+        .topic-section h3 {
+            margin-top: 25px;
+        }
+
+        .topic-figure {
+            margin: 25px auto;
+            text-align: center;
+            max-width: 100%;
+            overflow-x: auto;
+        }
+
+        .topic-figure svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .topic-figure figcaption {
+            color: #90998a;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        .mat-table td,
+        .mat-table th {
+            padding: 12px;
+        }
+
+        mjx-container {
+            max-width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+
+        @media(max-width:600px) {
+            .formula-box {
+                padding: 15px 10px;
+                font-size: 15px;
+            }
+
+            .example-box {
+                padding: 14px;
+            }
+        }
+        /* PETA KONSEP */
+        .cmap {
+            background: #ffffff;
+            border: 1px solid #e8eee2;
+            border-radius: 16px;
+            padding: 22px;
+            margin: 0 0 22px;
+        }
+
+        .cmap h2 {
+            margin: 0 0 4px;
+            font-size: 19px;
+            color: #2f4a28;
+        }
+
+        .cmap-intro {
+            margin: 0 0 18px;
+            font-size: 13px;
+            color: #828d7a;
+        }
+
+        .cm-node {
+            border: 1.5px solid #6a9a45;
+            border-radius: 12px;
+            background: #f4f9f0;
+            padding: 11px 14px;
+            text-align: center;
+            line-height: 1.45;
+            color: #2f4a28;
+        }
+
+        .cm-node b {
+            display: block;
+            font-size: 14.5px;
+        }
+
+        .cm-node .cm-eq {
+            display: block;
+            margin-top: 3px;
+            font-family: "Cambria Math", "Times New Roman", serif;
+            font-size: 16px;
+            color: #4a7a31;
+        }
+
+        .cm-node small {
+            display: block;
+            margin-top: 3px;
+            font-size: 11.5px;
+            color: #6a7464;
+        }
+
+        .cm-root {
+            max-width: 420px;
+            margin: 0 auto;
+            background: #2f4a28;
+            border-color: #2f4a28;
+            color: #ffffff;
+        }
+
+        .cm-root small {
+            color: #dfe8d4;
+        }
+
+        .cm-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 6px 0;
+            color: #6a7464;
+            font-size: 12px;
+            font-style: italic;
+            text-align: center;
+        }
+
+        .cm-link::after {
+            content: "\25BC";
+            font-style: normal;
+            color: #6a9a45;
+            font-size: 12px;
+            line-height: 1;
+            margin-top: 2px;
+        }
+
+        .cm-branches {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 4px;
+        }
+
+        .cm-branch {
+            border: 1px dashed #c9d8bb;
+            border-radius: 14px;
+            padding: 12px;
+            min-width: 0;
+        }
+
+        .cm-branch-title {
+            display: block;
+            margin: 0 0 8px;
+            font-size: 11.5px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: #6a9a45;
+            text-align: center;
+        }
+
+        .cm-pair {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .cm-key {
+            background: #6a9a45;
+            border-color: #6a9a45;
+            color: #ffffff;
+        }
+
+        .cm-key .cm-eq,
+        .cm-key small {
+            color: #ffffff;
+        }
+
+        @media (max-width: 760px) {
+            .cm-branches {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .cmap {
+                padding: 16px 12px;
+            }
+
+            .cm-pair {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* VIDEO PEMBELAJARAN */
+        .video-box {
+            margin: 22px 0;
+            padding: 16px;
+            background: #fafcf8;
+            border: 1px solid #e4ebdd;
+            border-radius: 12px;
+        }
+
+        .topic-section .video-box h3 {
+            margin: 0 0 4px;
+            font-size: 15px;
+            color: #2f4a28;
+        }
+
+        .video-box p {
+            margin: 0 0 12px;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #788271;
+        }
+
+        .yt-frame {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #1c261a;
+        }
+
+        .yt-frame iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .yt-link {
+            display: inline-block;
+            margin-top: 9px;
+            font-size: 12.5px;
+            font-weight: 600;
+            color: #6a9a45;
+            text-decoration: none;
+        }
+
+        .yt-link:hover {
+            text-decoration: underline;
+        }
+
+        @media(max-width:600px) {
+            .video-box {
+                padding: 12px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="css/theme.css">
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <aside class="sidebar" id="sidebar"></aside>
+    <script src="js/sidebar.js"></script>
+
+    <main class="main-content">
+
+        <header class="topbar">
+            <button id="menuToggle" class="menu-toggle">☰</button>
+            <div class="breadcrumb">
+                VIRTUAL LAB / <strong>Materi Pembelajaran</strong>
+            </div>
+            <div class="profile">
+                <div class="profile-avatar">S</div>
+                <div>
+                    <strong>Peserta Didik</strong>
+                    <small>Siswa Fisika SMA</small>
+                </div>
+            </div>
+        </header>
+
+        <section class="page-content">
+
+            <div class="page-header">
+                <h1>Materi Pembelajaran</h1>
+                <p>
+                    Pelajari konsep tegangan, regangan, Modulus Young,
+                    dan Hukum Hooke sebelum melakukan percobaan.
+                </p>
+            </div>
+
+            <div class="ach" data-ach="materi"></div>
+
+            <!-- PETA KONSEP -->
+            <section class="cmap" id="petaKonsep" aria-label="Peta konsep elastisitas">
+
+                <h2>Peta Konsep</h2>
+                <p class="cmap-intro">Lihat dulu hubungan antar konsep, lalu pelajari tiap topik di bawah.</p>
+
+                <div class="cm-node cm-root">
+                    <b>ELASTISITAS</b>
+                    <small>Kemampuan benda kembali ke bentuk semula setelah gaya dihilangkan</small>
+                </div>
+
+                <div class="cm-link">dipelajari pada dua jenis benda</div>
+
+                <div class="cm-branches">
+
+                    <div class="cm-branch">
+                        <span class="cm-branch-title">Kawat / batang (bahan)</span>
+
+                        <div class="cm-pair">
+                            <div class="cm-node">
+                                <b>1. Tegangan (σ)</b>
+                                <span class="cm-eq">σ = F / A</span>
+                                <small>gaya per satuan luas penampang (Pa)</small>
+                            </div>
+                            <div class="cm-node">
+                                <b>2. Regangan (ε)</b>
+                                <span class="cm-eq">ε = ΔL / L<sub>0</sub></span>
+                                <small>pertambahan panjang relatif (tanpa satuan)</small>
+                            </div>
+                        </div>
+
+                        <div class="cm-link">σ dibagi ε menghasilkan</div>
+
+                        <div class="cm-node cm-key">
+                            <b>3. Modulus Young (E)</b>
+                            <span class="cm-eq">E = σ / ε</span>
+                            <small>ukuran kekakuan bahan (Pa)</small>
+                        </div>
+                    </div>
+
+                    <div class="cm-branch">
+                        <span class="cm-branch-title">Pegas</span>
+
+                        <div class="cm-node cm-key">
+                            <b>4. Hukum Hooke</b>
+                            <span class="cm-eq">F = k Δx</span>
+                            <small>berlaku selama di bawah batas elastis</small>
+                        </div>
+
+                        <div class="cm-link">dilanjutkan dengan</div>
+
+                        <div class="cm-pair">
+                            <div class="cm-node">
+                                <b>Energi potensial pegas</b>
+                                <span class="cm-eq">E<sub>p</sub> = ½ k Δx²</span>
+                                <small>luas di bawah grafik F–Δx</small>
+                            </div>
+                            <div class="cm-node">
+                                <b>Susunan pegas</b>
+                                <small>seri: lebih lunak<br>paralel: lebih kaku</small>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <div class="topic-tabs" id="topicTabs">
+                <button class="topic-tab active" data-topic="0">Tegangan</button>
+                <button class="topic-tab" data-topic="1">Regangan</button>
+                <button class="topic-tab" data-topic="2">Modulus Young</button>
+                <button class="topic-tab" data-topic="3">Hukum Hooke</button>
+            </div>
+
+            <!-- MATERI 1: TEGANGAN -->
+            <article class="topic-section page-panel active" id="topic0">
+
+                <h2>1. Tegangan (Stress)</h2>
+
+                <p>
+                    Ketika sebatang kawat ditarik, gaya yang bekerja terbagi
+                    pada seluruh penampang kawat. <strong>Tegangan</strong>
+                    adalah besar gaya yang bekerja tegak lurus pada setiap
+                    satuan luas penampang benda.
+                </p>
+
+                <div class="video-box">
+                    <h3>🎬 Video Pembelajaran: Tegangan</h3>
+                    <p>Penjelasan tegangan (stress) beserta contoh soal. Video ini membahas tegangan, regangan, dan modulus elastisitas secara berurutan.</p>
+                    <div class="yt-frame" data-yt="52Ydl6eHPWU" data-title="Video pembelajaran Tegangan"></div>
+                    <a class="yt-link" href="https://www.youtube.com/watch?v=52Ydl6eHPWU" target="_blank" rel="noopener">Video tidak tampil? Buka di YouTube ↗</a>
+                </div>
+
+
+                <div class="formula-box">
+                    \[
+                    \boxed{\sigma = \frac{F}{A}}
+                    \]
+
+                    <small>
+                        \(\sigma\) = tegangan (N/m² atau Pa)<br>
+                        \(F\) = gaya tarik (N)<br>
+                        \(A\) = luas penampang (m²)
+                    </small>
+                </div>
+
+                <h3>Hal penting</h3>
+                <ul>
+                    <li>
+                        Satuan SI tegangan adalah pascal (Pa), dengan
+                        \(1\text{ Pa}=1\text{ N/m}^2\).
+                        \(1\text{ MPa}=10^6\text{ Pa}\) dan
+                        \(1\text{ GPa}=10^9\text{ Pa}\).
+                    </li>
+                    <li>
+                        Untuk kawat berpenampang lingkaran:
+                        \[
+                        A=\frac{1}{4}\pi d^2
+                        \]
+                        dengan \(d\) adalah diameter kawat.
+                    </li>
+                    <li>
+                        Pada kawat yang sama, makin besar gaya maka makin
+                        besar tegangan. Pada gaya yang sama, kawat yang
+                        lebih tipis mengalami tegangan lebih besar.
+                    </li>
+                    <li>Tegangan adalah besaran skalar.</li>
+                </ul>
+
+                <div class="example-box">
+                    <strong>Contoh soal.</strong>
+                    Kawat baja berpenampang 2 mm² ditarik dengan gaya 400 N.
+                    Berapa tegangannya?
+
+                    <p><em>Penyelesaian:</em></p>
+
+                    \[
+                    A=2\text{ mm}^2=2\times10^{-6}\text{ m}^2
+                    \]
+
+                    \[
+                    \begin{aligned}
+                    \sigma &= \frac{F}{A}\\
+                    &=\frac{400}{2\times10^{-6}}\\
+                    &=2\times10^8\text{ Pa}
+                    \end{aligned}
+                    \]
+
+                    Jadi, tegangan kawat adalah
+                    <strong>\(2\times10^8\text{ Pa}\) atau 200 MPa.</strong>
+                </div>
+
+            </article>
+
+            <!-- MATERI 2: REGANGAN -->
+            <article class="topic-section page-panel" id="topic1">
+
+                <h2>2. Regangan (Strain)</h2>
+
+                <p>
+                    <strong>Regangan</strong> adalah perbandingan antara
+                    pertambahan panjang benda dengan panjang awalnya.
+                    Regangan menyatakan seberapa besar benda meregang
+                    relatif terhadap ukuran awalnya.
+                </p>
+
+                <div class="video-box">
+                    <h3>🎬 Video Pembelajaran: Regangan</h3>
+                    <p>Penjelasan regangan (strain) beserta contoh soal. Video ini membahas tegangan, regangan, dan Modulus Young secara berurutan.</p>
+                    <div class="yt-frame" data-yt="R6yaX17mHwM" data-title="Video pembelajaran Regangan"></div>
+                    <a class="yt-link" href="https://www.youtube.com/watch?v=R6yaX17mHwM" target="_blank" rel="noopener">Video tidak tampil? Buka di YouTube ↗</a>
+                </div>
+
+
+                <div class="formula-box">
+                    \[
+                    \boxed{\varepsilon=\frac{\Delta L}{L_0}}
+                    \]
+
+                    <small>
+                        \(\varepsilon\) = regangan (tanpa satuan)<br>
+                        \(\Delta L\) = pertambahan panjang (m)<br>
+                        \(L_0\) = panjang mula-mula (m)
+                    </small>
+                </div>
+
+                <h3>Hal penting</h3>
+                <ul>
+                    <li>
+                        Regangan tidak memiliki satuan karena merupakan
+                        perbandingan dua besaran sejenis.
+                    </li>
+                    <li>
+                        Regangan sering dinyatakan dalam persen:
+                        \[
+                        \varepsilon_{\%}=\varepsilon\times100\%
+                        \]
+                    </li>
+                    <li>
+                        Kawat panjang dan kawat pendek yang bertambah
+                        panjang sama besar memiliki regangan berbeda.
+                        Kawat yang lebih pendek memiliki regangan lebih besar.
+                    </li>
+                </ul>
+
+                <div class="example-box">
+                    <strong>Contoh soal.</strong>
+                    Kawat sepanjang 2 m bertambah panjang 1 mm saat ditarik.
+                    Hitung regangannya.
+
+                    <p><em>Penyelesaian:</em></p>
+
+                    \[
+                    \Delta L=1\text{ mm}=1\times10^{-3}\text{ m}
+                    \]
+
+                    \[
+                    \begin{aligned}
+                    \varepsilon &= \frac{\Delta L}{L_0}\\
+                    &=\frac{10^{-3}}{2}\\
+                    &=5\times10^{-4}
+                    \end{aligned}
+                    \]
+
+                    Jadi, regangannya adalah
+                    <strong>\(5\times10^{-4}\) atau 0,05%.</strong>
+                </div>
+
+            </article>
+
+            <!-- MATERI 3: MODULUS YOUNG -->
+            <article class="topic-section page-panel" id="topic2">
+
+                <h2>3. Modulus Young (Modulus Elastisitas)</h2>
+
+                <p>
+                    Pada daerah elastis, tegangan sebanding dengan regangan.
+                    Perbandingannya merupakan konstanta khas bahan yang
+                    disebut <strong>Modulus Young</strong>. Makin besar
+                    nilai \(E\), makin kaku bahan tersebut.
+                </p>
+
+                <div class="video-box">
+                    <h3>🎬 Video Pembelajaran: Modulus Young</h3>
+                    <p>Penjelasan Modulus Young (modulus elastisitas) dan grafik elastisitas bahan.</p>
+                    <div class="yt-frame" data-yt="nVkj6GrHIn8" data-title="Video pembelajaran Modulus Young"></div>
+                    <a class="yt-link" href="https://www.youtube.com/watch?v=nVkj6GrHIn8" target="_blank" rel="noopener">Video tidak tampil? Buka di YouTube ↗</a>
+                </div>
+
+
+                <div class="formula-box">
+                    \[
+                    \boxed{E=\frac{\sigma}{\varepsilon}}
+                    \]
+
+                    \[
+                    \boxed{E=\frac{F L_0}{A\Delta L}}
+                    \]
+
+                    <small>
+                        \(E\) = Modulus Young (Pa)<br>
+                        \(\sigma\) = tegangan (Pa)<br>
+                        \(\varepsilon\) = regangan<br>
+                        \(F\) = gaya (N)<br>
+                        \(L_0\) = panjang awal (m)<br>
+                        \(A\) = luas penampang (m²)<br>
+                        \(\Delta L\) = pertambahan panjang (m)
+                    </small>
+                </div>
+
+                <p>Bentuk persamaan untuk mencari pertambahan panjang:</p>
+
+                <div class="equation">
+                    \[
+                    \boxed{\Delta L=\frac{F L_0}{A E}}
+                    \]
+                </div>
+
+                <figure class="topic-figure">
+                    <svg viewBox="0 0 360 200" width="360" role="img"
+                         aria-label="Kurva tegangan-regangan">
+                        <line x1="40" y1="170" x2="340" y2="170"
+                              stroke="#63705b" stroke-width="2"/>
+                        <line x1="40" y1="170" x2="40" y2="15"
+                              stroke="#63705b" stroke-width="2"/>
+                        <polyline points="40,170 120,70" fill="none"
+                                  stroke="#6a9a45" stroke-width="3"/>
+                        <path d="M120,70 Q160,50 200,48 Q250,46 280,80"
+                              fill="none" stroke="#d32b4d" stroke-width="3"/>
+                        <circle cx="120" cy="70" r="4" fill="#2f4a28"/>
+                        <circle cx="200" cy="48" r="4" fill="#2f4a28"/>
+                        <text x="278" y="98" font-size="11" fill="#c4304f">✕ patah</text>
+                        <text x="46" y="60" font-size="11" fill="#2f4a28">batas proporsional</text>
+                        <text x="160" y="40" font-size="11" fill="#2f4a28">tegangan maksimum</text>
+                        <text x="52" y="135" font-size="12" fill="#6a9a45"
+                              transform="rotate(-51 52 135)">kemiringan = E</text>
+                        <text x="320" y="188" font-size="12" fill="#63705b">ε</text>
+                        <text x="18" y="22" font-size="12" fill="#63705b">σ</text>
+                    </svg>
+                    <figcaption>
+                        Kurva tegangan–regangan: bagian lurus memiliki
+                        kemiringan yang menyatakan Modulus Young.
+                    </figcaption>
+                </figure>
+
+                <h3>Nilai Modulus Young beberapa bahan</h3>
+
+                <div class="table-wrapper">
+                    <table class="mat-table">
+                        <tr>
+                            <th>Bahan</th>
+                            <th>\(E\) (Pa)</th>
+                            <th>Keterangan</th>
+                        </tr>
+                        <tr><td>Baja</td><td>\(2,0\times10^{11}\)</td><td>Sangat kaku</td></tr>
+                        <tr><td>Tembaga</td><td>\(1,1\times10^{11}\)</td><td>Kaku</td></tr>
+                        <tr><td>Kuningan</td><td>\(1,0\times10^{11}\)</td><td>Kaku</td></tr>
+                        <tr><td>Aluminium</td><td>\(6,9\times10^{10}\)</td><td>Lebih mudah meregang dari baja</td></tr>
+                        <tr><td>Kayu</td><td>\(1,0\times10^{10}\)</td><td>Bergantung arah serat</td></tr>
+                        <tr><td>Plastik PVC</td><td>\(3,0\times10^9\)</td><td>Cukup lentur</td></tr>
+                        <tr><td>Karet</td><td>\(1,0\times10^7\)</td><td>Sangat mudah meregang</td></tr>
+                    </table>
+                </div>
+
+                <p>
+                    Nilai-nilai ini sama dengan yang dipakai pada menu
+                    <strong>Virtual Laboratory</strong>, sehingga hasil
+                    percobaanmu dapat dibandingkan dengan teori.
+                </p>
+
+                <h3>Faktor yang memengaruhi pertambahan panjang</h3>
+                <ul>
+                    <li>Makin besar gaya \(F\), makin besar \(\Delta L\).</li>
+                    <li>Makin panjang kawat \(L_0\), makin besar \(\Delta L\).</li>
+                    <li>Makin besar luas penampang \(A\), makin kecil \(\Delta L\).</li>
+                    <li>Makin besar Modulus Young \(E\), makin kecil \(\Delta L\).</li>
+                </ul>
+
+                <div class="example-box">
+                    <strong>Contoh soal.</strong>
+                    Kawat baja (\(E=2\times10^{11}\) Pa) panjang 2 m dan
+                    luas penampang 2 mm² digantung beban 20 kg
+                    (\(g=10\text{ m/s}^2\)). Berapa pertambahan panjangnya?
+
+                    <p><em>Penyelesaian:</em></p>
+
+                    \[
+                    F=mg=20\times10=200\text{ N}
+                    \]
+
+                    \[
+                    A=2\times10^{-6}\text{ m}^2
+                    \]
+
+                    \[
+                    \begin{aligned}
+                    \Delta L
+                    &=\frac{F L_0}{A E}\\
+                    &=\frac{200\times2}
+                    {2\times10^{-6}\times2\times10^{11}}\\
+                    &=\frac{400}{4\times10^5}\\
+                    &=10^{-3}\text{ m}
+                    \end{aligned}
+                    \]
+
+                    Jadi, pertambahan panjang kawat adalah
+                    <strong>1 mm.</strong>
+                </div>
+
+            </article>
+
+            <!-- MATERI 4: HUKUM HOOKE -->
+            <article class="topic-section page-panel" id="topic3">
+
+                <h2>4. Hukum Hooke</h2>
+
+                <p>
+                    Robert Hooke menemukan bahwa selama batas elastis belum
+                    terlampaui, pertambahan panjang pegas sebanding dengan
+                    gaya yang menariknya.
+                </p>
+
+                <div class="video-box">
+                    <h3>🎬 Video Pembelajaran: Hukum Hooke</h3>
+                    <p>Materi dan pembahasan soal Hukum Hooke.</p>
+                    <div class="yt-frame" data-yt="QPUi7DWEKl0" data-title="Video pembelajaran Hukum Hooke"></div>
+                    <a class="yt-link" href="https://www.youtube.com/watch?v=QPUi7DWEKl0" target="_blank" rel="noopener">Video tidak tampil? Buka di YouTube ↗</a>
+                </div>
+
+
+                <div class="formula-box">
+                    \[
+                    \boxed{F=k\Delta x}
+                    \]
+
+                    <small>
+                        \(F\) = gaya (N)<br>
+                        \(k\) = konstanta pegas (N/m)<br>
+                        \(\Delta x\) = perubahan panjang pegas (m)
+                    </small>
+                </div>
+
+                <p>
+                    Hubungan dengan Modulus Young:
+                </p>
+
+                <div class="equation">
+                    \[
+                    \boxed{k=\frac{EA}{L_0}}
+                    \]
+                </div>
+
+                <p>
+                    Jadi, konstanta pegas dipengaruhi oleh bahan,
+                    luas penampang, dan panjang awal.
+                </p>
+
+                <figure class="topic-figure">
+                    <svg viewBox="0 0 360 200" width="360" role="img"
+                         aria-label="Grafik gaya terhadap pertambahan panjang">
+                        <line x1="40" y1="170" x2="340" y2="170"
+                              stroke="#63705b" stroke-width="2"/>
+                        <line x1="40" y1="170" x2="40" y2="15"
+                              stroke="#63705b" stroke-width="2"/>
+                        <polyline points="40,170 200,60" fill="none"
+                                  stroke="#6a9a45" stroke-width="3"/>
+                        <path d="M200,60 Q250,38 285,32" fill="none"
+                              stroke="#c4304f" stroke-width="3"/>
+                        <line x1="200" y1="60" x2="200" y2="170"
+                              stroke="#949e8e" stroke-dasharray="4"/>
+                        <circle cx="200" cy="60" r="4" fill="#2f4a28"/>
+                        <text x="206" y="82" font-size="11" fill="#2f4a28">batas elastis</text>
+                        <text x="100" y="105" font-size="12" fill="#6a9a45"
+                              transform="rotate(-34 100 105)">daerah linear (F = k·Δx)</text>
+                        <text x="240" y="22" font-size="11" fill="#c4304f">plastis</text>
+                        <text x="330" y="188" font-size="12" fill="#63705b">Δx</text>
+                        <text x="18" y="22" font-size="12" fill="#63705b">F</text>
+                    </svg>
+                    <figcaption>
+                        Grafik \(F\)–\(\Delta x\): garis lurus pada daerah
+                        elastis, gradiennya adalah \(k\).
+                    </figcaption>
+                </figure>
+
+                <h3>Batas elastis</h3>
+
+                <p>
+                    Jika gaya melebihi batas elastis, bahan tidak kembali
+                    ke bentuk semula (deformasi plastis) dan Hukum Hooke
+                    tidak berlaku lagi.
+                </p>
+
+                <h3>Energi potensial pegas</h3>
+
+                <div class="formula-box">
+                    \[
+                    \boxed{E_p=\frac{1}{2}k(\Delta x)^2}
+                    \]
+
+                    \[
+                    \boxed{E_p=\frac{1}{2}F\Delta x}
+                    \]
+
+                    <small>
+                        Energi potensial pegas sama dengan luas segitiga
+                        di bawah grafik gaya terhadap pertambahan panjang.
+                    </small>
+                </div>
+
+                <div class="video-box">
+                    <h3>🎬 Video Pembelajaran: Energi Potensial Pegas</h3>
+                    <p>Penjelasan energi potensial pegas.</p>
+                    <div class="yt-frame" data-yt="vVsftlWls1E" data-title="Video pembelajaran Energi Potensial Pegas"></div>
+                    <a class="yt-link" href="https://www.youtube.com/watch?v=vVsftlWls1E" target="_blank" rel="noopener">Video tidak tampil? Buka di YouTube ↗</a>
+                </div>
+
+                <h3>Susunan pegas</h3>
+
+                <div class="table-wrapper">
+                    <table class="mat-table">
+                        <tr>
+                            <th>Susunan</th>
+                            <th>Konstanta pengganti</th>
+                            <th>Sifat</th>
+                        </tr>
+                        <tr>
+                            <td>Seri</td>
+                            <td>
+                                \[
+                                \frac{1}{k_s}
+                                =
+                                \frac{1}{k_1}
+                                +
+                                \frac{1}{k_2}
+                                +\cdots
+                                \]
+                            </td>
+                            <td>Gaya sama, pertambahan panjang dijumlahkan; makin lunak.</td>
+                        </tr>
+                        <tr>
+                            <td>Paralel</td>
+                            <td>
+                                \[
+                                k_p=k_1+k_2+\cdots
+                                \]
+                            </td>
+                            <td>Pertambahan panjang sama, gaya dijumlahkan; makin kaku.</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="video-box">
+                    <h3>🎬 Video Pembelajaran: Susunan Pegas</h3>
+                    <p>Penjelasan rangkaian pegas seri dan paralel.</p>
+                    <div class="yt-frame" data-yt="8GxtvXGtjXA" data-title="Video pembelajaran Susunan Pegas"></div>
+                    <a class="yt-link" href="https://www.youtube.com/watch?v=8GxtvXGtjXA" target="_blank" rel="noopener">Video tidak tampil? Buka di YouTube ↗</a>
+                </div>
+
+
+                <div class="example-box">
+                    <strong>Contoh soal.</strong>
+                    Pegas dengan \(k=200\text{ N/m}\) digantung beban
+                    0,5 kg (\(g=10\text{ m/s}^2\)). Tentukan pertambahan
+                    panjang dan energi potensialnya.
+
+                    <p><em>Penyelesaian:</em></p>
+
+                    \[
+                    F=mg=0,5\times10=5\text{ N}
+                    \]
+
+                    \[
+                    \begin{aligned}
+                    \Delta x&=\frac{F}{k}\\
+                    &=\frac{5}{200}\\
+                    &=0,025\text{ m}=2,5\text{ cm}
+                    \end{aligned}
+                    \]
+
+                    \[
+                    \begin{aligned}
+                    E_p&=\frac{1}{2}k(\Delta x)^2\\
+                    &=\frac{1}{2}\times200\times(0,025)^2\\
+                    &=0,0625\text{ J}
+                    \end{aligned}
+                    \]
+
+                    Jadi, pertambahan panjang pegas adalah
+                    <strong>2,5 cm</strong> dan energi potensialnya
+                    <strong>0,0625 J.</strong>
+                </div>
+
+                <h3>Rangkuman</h3>
+
+                <ul>
+                    <li>
+                        Tegangan:
+                        \(\displaystyle \sigma=\frac{F}{A}\)
+                    </li>
+                    <li>
+                        Regangan:
+                        \(\displaystyle \varepsilon=\frac{\Delta L}{L_0}\)
+                    </li>
+                    <li>
+                        Modulus Young:
+                        \(\displaystyle E=\frac{\sigma}{\varepsilon}\)
+                    </li>
+                    <li>
+                        Hukum Hooke:
+                        \(\displaystyle F=k\Delta x\), berlaku selama
+                        berada di daerah elastis.
+                    </li>
+                    <li>
+                        Susunan seri menghasilkan pegas pengganti lebih
+                        lunak, sedangkan susunan paralel menghasilkan
+                        pegas pengganti lebih kaku.
+                    </li>
+                </ul>
+
+                <p>
+                    Sekarang uji teorinya di
+                    <a href="simulasi.html">Virtual Laboratory</a>,
+                    lalu kerjakan
+                    <a href="evaluasi.html">Evaluasi</a>.
+                </p>
+
+            </article>
+
+            <div class="topic-nav">
+                <button class="ghost" id="prevTopic">← Sebelumnya</button>
+                <button id="nextTopic">Selanjutnya →</button>
+            </div>
+
+        </section>
+
+    </main>
+</div>
+
+<script src="js/pencapaian.js"></script>
+<script src="js/app.js"></script>
+
+<script>
+(function () {
+    const tabs = document.querySelectorAll(".topic-tab");
+    const secs = document.querySelectorAll(".topic-section");
+    const prev = document.getElementById("prevTopic");
+    const next = document.getElementById("nextTopic");
+
+    let cur = 0;
+
+    try {
+        cur = Math.min(
+            Math.max(
+                parseInt(localStorage.getItem("virtualLabMateriTab")) || 0,
+                0
+            ),
+            secs.length - 1
+        );
+    } catch (e) {}
+
+    function show(i) {
+        cur = i;
+
+        tabs.forEach((tab, index) => {
+            tab.classList.toggle("active", index === i);
+        });
+
+        secs.forEach((section, index) => {
+            section.classList.toggle("active", index === i);
+        });
+
+        prev.disabled = i === 0;
+        next.disabled = i === secs.length - 1;
+
+        try {
+            localStorage.setItem("virtualLabMateriTab", i);
+        } catch (e) {}
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+        // Render ulang persamaan pada bagian yang baru dibuka
+        if (window.MathJax && window.MathJax.typesetPromise) {
+            window.MathJax.typesetPromise([secs[i]]).catch(function (err) {
+                console.error("MathJax error:", err);
+            });
+        }
+    }
+
+    tabs.forEach((tab, index) => {
+        tab.addEventListener("click", () => show(index));
+    });
+
+    prev.addEventListener("click", () => {
+        if (cur > 0) show(cur - 1);
+    });
+
+    next.addEventListener("click", () => {
+        if (cur < secs.length - 1) show(cur + 1);
+    });
+
+    show(cur);
+})();
+</script>
+
+<script>
+(function () {
+    document.querySelectorAll(".yt-frame[data-yt]").forEach(function (box) {
+        var frame = document.createElement("iframe");
+
+        frame.src = "https://www.youtube-nocookie.com/embed/" +
+            encodeURIComponent(box.dataset.yt) + "?rel=0";
+        frame.title = box.dataset.title || "Video pembelajaran";
+        frame.loading = "lazy";
+        frame.referrerPolicy = "strict-origin-when-cross-origin";
+        frame.allow = "accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share";
+        frame.allowFullscreen = true;
+
+        box.appendChild(frame);
+    });
+})();
+</script>
+
+</body>
+</html>

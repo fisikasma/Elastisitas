@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2f4a28">
+    <meta name="description"
+        content="Petunjuk penggunaan Virtual Lab Elastisitas: langkah belajar dari materi, praktikum virtual, LKPD, sampai evaluasi.">
+
+    <title>Petunjuk Penggunaan | Virtual Lab Elastisitas</title>
+
+    <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/auth.js"></script>
+    <link rel="stylesheet" href="css/theme.css">
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <aside class="sidebar" id="sidebar"></aside>
+    <script src="js/sidebar.js"></script>
+
+    <main class="main-content">
+
+        <header class="topbar">
+            <button id="menuToggle" class="menu-toggle" type="button">☰</button>
+
+            <div class="breadcrumb">
+                VIRTUAL LAB / <strong>Petunjuk Penggunaan</strong>
+            </div>
+
+            <div class="profile">
+                <div class="profile-avatar">S</div>
+                <div>
+                    <strong>Peserta Didik</strong>
+                    <small>Siswa Fisika SMA</small>
+                </div>
+            </div>
+        </header>
+
+        <section class="page-content">
+
+            <div class="page-header">
+                <h1>Petunjuk Penggunaan</h1>
+                <p>
+                    Ikuti langkah berikut agar belajar dengan Virtual Lab Elastisitas
+                    berjalan lancar.
+                </p>
+            </div>
+
+            <div class="guide-grid">
+
+                <article class="guide-card">
+                    <span class="guide-no">1</span>
+                    <div>
+                        <h3>Mulai dari materi</h3>
+                        <p>
+                            Buka <a href="materi.html">Materi Pembelajaran</a>, lalu pelajari
+                            empat topik: tegangan, regangan, Modulus Young, dan Hukum Hooke.
+                            Pindah topik lewat tab atau tombol Sebelumnya dan Selanjutnya.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="guide-card">
+                    <span class="guide-no">2</span>
+                    <div>
+                        <h3>Lakukan percobaan</h3>
+                        <p>
+                            Di <a href="simulasi.html">Virtual Laboratory</a>, ikuti Prosedur
+                            Percobaan: pilih bahan, rakit alat sesuai urutan (statif, penggaris, bahan uji, beban), lalu tekan Pasang Beban dan amati pertambahan panjangnya.
+                            Hasilnya masuk ke tabel Data Hasil Pengamatan dan grafik gaya
+                            terhadap pertambahan panjang. Data bisa diekspor ke CSV.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="guide-card">
+                    <span class="guide-no">3</span>
+                    <div>
+                        <h3>Isi LKPD</h3>
+                        <p>
+                            Buka <a href="lkpd.html">LKPD Digital</a>, isi identitas, lalu
+                            kerjakan kegiatannya berurutan. Data pengamatan dari laboratorium
+                            ikut tampil di sana, dan jawabanmu tersimpan otomatis di perangkat
+                            ini.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="guide-card">
+                    <span class="guide-no">4</span>
+                    <div>
+                        <h3>Kerjakan evaluasi</h3>
+                        <p>
+                            Setiap sesi di <a href="evaluasi.html">Evaluasi</a> berisi 10 soal
+                            pilihan ganda yang diambil acak dari bank 100 soal. Pembahasan
+                            muncul setelah tiap jawaban. Saat kamu mengulang, soalnya baru.
+                            Gunakan g = 10 m/s².
+                        </p>
+                    </div>
+                </article>
+
+                <article class="guide-card">
+                    <span class="guide-no">5</span>
+                    <div>
+                        <h3>Pantau pencapaianmu</h3>
+                        <p>
+                            Persentase kemajuanmu di materi, laboratorium, LKPD, dan evaluasi
+                            tampil di <a href="index.html">Dashboard</a> dan di bagian atas
+                            tiap halaman.
+                        </p>
+                    </div>
+                </article>
+
+            </div>
+
+            <div class="guide-note">
+                <h3>Catatan teknis</h3>
+                <ul>
+                    <li>
+                        Simulasi, LKPD, dan soal evaluasi berjalan tanpa internet. Rumus pada
+                        Materi dan Evaluasi dimuat dari internet, jadi sambungkan internet
+                        supaya rumusnya tampil rapi.
+                    </li>
+                    <li>
+                        Data pengamatan, jawaban LKPD, dan pencapaian tersimpan di browser
+                        perangkat ini. Jika data browser dihapus atau kamu pindah perangkat,
+                        progresnya mulai dari awal.
+                    </li>
+                    <li>
+                        Jalankan lewat server (misalnya Live Server di VS Code), bukan dengan
+                        membuka file langsung, agar penyimpanan identitas bekerja dengan baik.
+                    </li>
+                    <li>
+                        Di HP, buka menu navigasi lewat tombol ☰ di kiri atas.
+                    </li>
+                </ul>
+            </div>
+
+            <footer>
+                <h3>VIRTUAL LAB: ELASTISITAS</h3>
+                <p>Laboratorium Virtual Fisika SMA</p>
+                <small>Media Pembelajaran Fisika</small>
+            </footer>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="js/app.js"></script>
+
+</body>
+</html>

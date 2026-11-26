@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2f4a28">
+    <meta name="description" content="Virtual Lab Elastisitas: media pembelajaran fisika SMA untuk Hukum Hooke, tegangan, regangan, dan Modulus Young.">
+
+    <title>Evaluasi | Virtual Lab Elastisitas</title>
+
+    <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Konfigurasi MathJax -->
+    <script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['\\(', '\\)']],
+            displayMath: [['\\[', '\\]']]
+        },
+        options: {
+            skipHtmlTags: [
+                'script',
+                'noscript',
+                'style',
+                'textarea',
+                'pre',
+                'code'
+            ]
+        },
+        chtml: {
+            scale: 1.1
+        },
+        startup: {
+            typeset: false
+        }
+    };
+    </script>
+
+    <!-- Memuat MathJax -->
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <script src="js/auth.js"></script>
+    <link rel="stylesheet" href="css/theme.css">
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <aside class="sidebar" id="sidebar"></aside>
+    <script src="js/sidebar.js"></script>
+
+    <main class="main-content">
+
+        <header class="topbar">
+            <button id="menuToggle" class="menu-toggle">☰</button>
+            <div class="breadcrumb">VIRTUAL LAB / <strong>Evaluasi</strong></div>
+
+            <div class="profile">
+                <div class="profile-avatar">S</div>
+                <div>
+                    <strong>Peserta Didik</strong>
+                    <small>Siswa Fisika SMA</small>
+                </div>
+            </div>
+        </header>
+
+        <section class="page-content">
+
+            <div class="page-header">
+                <h1>Evaluasi</h1>
+                <p>Uji pemahamanmu tentang elastisitas dan Hukum Hooke. Gunakan g = 10 m/s².</p>
+            </div>
+
+            <div class="ach" data-ach="evaluasi"></div>
+
+            <div class="page-panel" id="startPanel">
+                <h2 style="font-size:19px;margin-bottom:10px">
+                    Kuis Pilihan Ganda
+                </h2>
+
+                <p style="font-size:13px;line-height:1.8;color:#63705b">
+                    10 soal • satu jawaban benar • pembahasan ditampilkan setiap selesai menjawab.
+                    Soal diambil acak dari bank 100 soal, dan setiap kali mengulang kamu mendapat soal yang berbeda.
+                    Urutan soal dan pilihan jawaban juga diacak.
+                </p>
+
+                <p id="bankInfo" style="font-size:12px;line-height:1.7;color:#63705b;margin-top:8px"></p>
+
+                <div class="action-buttons" style="margin-top:18px">
+                    <button class="primary-button" id="startBtn">
+                        Mulai Evaluasi
+                    </button>
+                </div>
+
+                <div id="history" style="margin-top:22px"></div>
+            </div>
+
+            <div class="page-panel" id="quizPanel" hidden>
+
+                <div class="quiz-meta">
+                    <span id="qCount"></span>
+                    <span id="qScore"></span>
+                </div>
+
+                <div class="quiz-progress">
+                    <div id="qBar"></div>
+                </div>
+
+                <p class="quiz-question" id="qText"></p>
+
+                <div class="quiz-options" id="qOptions"></div>
+
+                <div class="quiz-feedback" id="qFeedback" hidden></div>
+
+                <div class="action-buttons" style="margin-top:18px">
+                    <button class="primary-button" id="nextBtn" hidden>
+                        Lanjut →
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="page-panel result-center" id="resultPanel" hidden>
+
+                <h2 style="font-size:20px">Hasil Evaluasi</h2>
+
+                <div class="score-circle">
+                    <strong id="rScore">0</strong>
+                    <small>dari 100</small>
+                </div>
+
+                <p id="rText" style="font-size:14px;line-height:1.8;color:#4c5944"></p>
+
+                <div class="action-buttons" style="justify-content:center;margin:18px 0">
+                    <button class="primary-button" id="retryBtn">
+                        Kerjakan Soal Baru
+                    </button>
+
+                    <a class="secondary-button" href="materi.html" style="text-decoration:none">
+                        Buka Materi
+                    </a>
+                </div>
+
+                <div id="review" style="text-align:left"></div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="js/pencapaian.js"></script>
+<script src="js/app.js"></script>
+<script src="js/evaluasi.js"></script>
+
+</body>
+</html>
